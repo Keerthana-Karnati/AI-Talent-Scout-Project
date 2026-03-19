@@ -1,23 +1,27 @@
-🚀 AI Talent Scout: Resume-Job Matcher
-An AI-powered recruitment tool that analyzes professional resumes against job descriptions using Google Gemini 3.1 Flash. This project demonstrates a full-stack integration of Generative AI with a focus on secure API handling and automated document reporting.
+# 🚀 AI Talent Scout: Resume-Job Matcher
 
-🌟 Key Features
-Intelligent Analysis: Deep-dive scoring (out of 10), keyword alignment, and candidate strengths/gaps.
-Secure Architecture: Zero-exposure API key management using .env and environment variables.
-Professional PDF Export: Generates downloadable, sanitized reports using FPDF2.
-Modern UI: Responsive "Glassmorphism" dashboard with real-time loading states and session resets.
-🛠️ Technical Stack
-Backend: Python (Flask)
-AI Engine: Google Gemini 3.1
-PDF Engine: FPDF2 & PyPDF
-Frontend: HTML5, CSS3 (Glassmorphism UI), JavaScript
-📂 Project Structure
-├── app.py # Flask Backend & AI Logic
+An AI-powered recruitment tool that analyzes professional resumes against job descriptions using **Google Gemini 3.1 Flash**. This project demonstrates a full-stack integration of Generative AI with a focus on secure API handling and automated document reporting.
+
+## 🌟 Key Features
+- **Intelligent Analysis:** Deep-dive scoring (out of 10), keyword alignment, and candidate strengths/gaps.
+- **Secure Architecture:** Zero-exposure API key management using `.env` and environment variables.
+- **Professional PDF Export:** Generates downloadable, sanitized reports using **FPDF2**.
+- **Modern UI:** Responsive "Glassmorphism" dashboard with real-time loading states and session resets.
+
+## 🛠️ Technical Stack
+- **Backend:** Python (Flask)
+- **AI Engine:** Google Gemini 3.1 
+- **PDF Engine:** FPDF2 & PyPDF
+- **Frontend:** HTML5, CSS3 (Glassmorphism UI), JavaScript
+
+## 📂 Project Structure
+```text
+├── app.py              # Flask Backend & AI Logic
 ├── templates/
-│ └── index.html # Frontend Dashboard
-├── .env # Private API Keys (Ignored by Git)
-├── .gitignore # Security rules for Git
-└── requirements.txt # Project dependencies
+│   └── index.html      # Frontend Dashboard
+├── .env                # Private API Keys (Ignored by Git)
+├── .gitignore          # Security rules for Git
+└── requirements.txt    # Project dependencies
 
 ## 🔧 Installation & Setup
 
@@ -46,3 +50,4 @@ This project follows professional engineering standards by ensuring that the ven
 preventing credential leaks and keeping the repository lightweight and professional.
 
 🎓 **by Keerthana | MS in Computer Science | University of Central Missouri | GPA: 3.9**
+
