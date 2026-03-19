@@ -1,0 +1,23 @@
+
+
+*.pdf
+
+# Virtual environment (Folder)
+venv/
+env/
+ENV/
+
+# API keys and secrets (Files)
+.env
+*.env
+
+# Python cache (Folders)
+__pycache__/
+*.py[cod]
+
+# Local database/logs (Files)
+*.db
+*.log
+
+# OS specific files
+.DS_Store

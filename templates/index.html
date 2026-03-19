@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Talent Scout | Dashboard</title>
+    <style>
+        :root { --primary: #818cf8; --secondary: #c084fc; --bg: #020617; --card: rgba(30, 41, 59, 0.7); --text: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        
+        
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%); }
+        
+        .container { width: 90%; max-width: 850px; z-index: 1; }
+        .card { background: var(--card); backdrop-filter: blur(12px); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        
+        h1 { font-size: 2.8rem; margin: 0; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; letter-spacing: -1px; }
+        p.subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px; }
+        
+        label { font-weight: 600; color: #cbd5e1; display: block; margin-bottom: 10px; }
+        input[type="file"] { background: rgba(15, 23, 42, 0.5); padding: 10px; border-radius: 8px; width: 100%; border: 1px dashed #475569; color: #94a3b8; margin-bottom: 25px; box-sizing: border-box; }
+        textarea { width: 100%; height: 180px; background: rgba(15, 23, 42, 0.8); border: 1px solid #334155; border-radius: 12px; color: white; padding: 15px; font-size: 15px; margin-bottom: 25px; box-sizing: border-box; resize: vertical; outline: none; transition: 0.3s; }
+        textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); }
+        
+        .btn-glow { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1.1rem; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4); transition: all 0.3s; }
+        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.5); }
+        
+        .result-container { margin-top: 40px; animation: fadeIn 0.6s ease-out; }
+        .result-header { color: var(--primary); font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .result-content { background: rgba(15, 23, 42, 0.6); padding: 25px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); line-height: 1.8; color: #e2e8f0; white-space: pre-wrap; font-size: 15px; }
+        
+        .dl-btn { background: #059669; color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; margin-top: 20px; transition: 0.3s; }
+        .dl-btn:hover { background: #10b981; }
+
+        .btn-glow { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; 
+                    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex;justify-content: center;align-items: center;gap: 10px;}
+
+        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4); filter: brightness(1.1);}
+
+        #loader { display: none; text-align: center; padding: 20px; }
+        .spinner { width: 50px; height: 50px; border: 5px solid rgba(99,102,241,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s infinite linear; margin: 0 auto 15px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+    <script>
+        function startLoading() {
+            document.getElementById('form-ui').style.opacity = '0.3';
+            document.getElementById('form-ui').style.pointerEvents = 'none';
+            document.getElementById('loader').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <div class="card">
+            <h1>AI Talent Scout</h1>
+            <p class="subtitle">Resume Analysis powered by Gemini 3.1</p>
+            
+            <form id="form-ui" method="POST" enctype="multipart/form-data" onsubmit="startLoading()">
+                <label>👤 Candidate Name</label>
+                <input type="text" name="user_name" placeholder="Enter your full name" required style="width: 100%; background: rgba(15, 23, 42, 0.8); border: 1px solid #334155; border-radius: 8px; color: white; padding: 12px; margin-bottom: 20px; box-sizing: border-box;">
+                <label>📄 Upload PDF Resume</label>
+                <input type="file" name="resume" accept=".pdf" required>
+
+                <label>💼 Target Job Description</label>
+                <textarea name="job_desc" placeholder="Paste the job duties and requirements here..." required></textarea>
+                
+                <button type="submit" class="btn-glow">🚀 Run AI Analysis</button>
+            </form>
+
+            <div id="loader">
+                <div class="spinner"></div>
+                <p style="color: var(--primary); font-weight: 600;">AI is responding...</p>
+            </div>
+
+            {% if result %}
+<div class="result-card" style="margin-top: 40px; animation: fadeIn 0.6s ease-out; padding: 30px; background: rgba(15, 23, 42, 0.6); border-radius: 20px; border: 1px solid rgba(129, 140, 248, 0.2);">
+    
+    <div class="result-header">
+        <span>🔍</span> Analysis Results for {{ user_name }}
+    </div>
+    
+    <div class="result-content">
+        {{ result }}
+    </div>
+
+    <div style="margin-top: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px;">
+        <form action="/download_pdf" method="POST" onsubmit="resetAfterDownload()">
+            <input type="hidden" name="content" value="{{ result }}">
+            <input type="hidden" name="user_name" value="{{ user_name }}"> 
+            
+            <button type="submit" class="dl-btn" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); border: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; color: white; transition: all 0.3s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);">
+                <span>📥</span> Download PDF Report
+            </button>
+        </form>
+    </div>
+
+    <div style="margin-top: 25px; text-align: center;">
+        <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">Done with this analysis?</p>
+        <a href="/" style="text-decoration: none; background: linear-gradient(135deg, #334155 0%, #1e293b 100%); padding: 12px 40px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; color: white; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1);">
+            <span>🔄</span> Start New Analysis
+        </a>
+    </div>
+
+</div>
+
+<script>
+    function resetAfterDownload() {
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 1500);
+    }
+</script>
+{% endif %}
